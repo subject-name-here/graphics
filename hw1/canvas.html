@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>HW1</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+<input id="iterations" type="range" min="1" max="256" value="100" step="1" oninput="updateSettings();"/>
+<label>Количество итераций</label>
+<br>
+
+<input id="za" type="range" min="-1" max="1" value="0" step="0.01" oninput="updateSettings();"/>
+<label>z.a</label>
+<br>
+
+<input id="zb" type="range" min="-1" max="1" value="0" step="0.01" oninput="updateSettings();"/>
+<label>z.b</label>
+<br>
+
+<input id="infinity" type="range" min="0.1" max="3" value="2" step="0.05" oninput="updateSettings();"/>
+<label>Значение бесконечности</label>
+<br>
+
+<canvas id="canvas" width="1024" height="768"></canvas>
+
+</body>
+<script src="https://mdn.github.io/webgl-examples/tutorial/gl-matrix.js"></script>
+<script src="shaders.js"></script>
+<script src="main.js"></script>
+</html>
