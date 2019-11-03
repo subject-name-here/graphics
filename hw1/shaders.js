@@ -10,7 +10,7 @@ const vsSource = `
       }
 `;
 const fsSource = `
-    precision mediump float;
+    precision highp float;
     
     uniform int iterations;
     uniform float za;
