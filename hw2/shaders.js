@@ -43,7 +43,7 @@ const fsSource = `
     const float deg = 15.0;
 
     void main(void) {
-        if (cnoise(vec3(truePosition)) >= uThreshold) {
+        if (cnoise(vec3(truePosition)) > uThreshold) {
             discard;
         } 
     

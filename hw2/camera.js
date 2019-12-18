@@ -14,6 +14,12 @@ function getViewMatrix() {
     return modelViewMatrix;
 }
 
+function setPosition(z) {
+    if (z < 0) {
+        view.z = -z * 2;
+    }
+}
+
 function initMouseCallback(canvas) {
     let scope = this;
 

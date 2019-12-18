@@ -1,9 +1,6 @@
 const programInfo = {};
 const modelInfo = {};
 const buffers = {};
-const settings = {
-    dissolveThreshold : 0
-};
 
 const BATCH_SIZE = 9000;
 
@@ -33,6 +30,8 @@ function main() {
     programInfo.diffuse = gl.getUniformLocation(programInfo.shaderProgram, 'kd');
     programInfo.specular = gl.getUniformLocation(programInfo.shaderProgram, 'ks');
 
+    gl.useProgram(programInfo.shaderProgram);
+
     function render() {
         drawScene();
         requestAnimationFrame(render);
@@ -41,6 +40,14 @@ function main() {
     let loader = new THREE.OBJLoader();
     loader.load('models/man.obj', function ( obj ) {
         modelInfo.obj = obj;
+
+        modelInfo.min_z = 10000;
+        obj.children[0].geometry.attributes.position.array.forEach((val, ind) => {
+            if (ind % 3 === 2) {
+                modelInfo.min_z = Math.min(val, modelInfo.min_z);
+            }
+        });
+        setPosition(modelInfo.min_z);
 
         modelInfo.totalLength = obj.children[0].geometry.attributes.position.array.length;
         modelInfo.numOfChunks = Math.ceil(modelInfo.totalLength / BATCH_SIZE);
@@ -154,9 +161,6 @@ function drawScene() {
                 offset);
             gl.enableVertexAttribArray(programInfo.normalPosition);
         }
-
-
-        gl.useProgram(programInfo.shaderProgram);
 
         // Set the shader uniforms
 
